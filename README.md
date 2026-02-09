@@ -113,8 +113,13 @@ El modelo se valida con un conjunto de prueba (20%) utilizando:
 
 # Cómo preparar y ejecutar el proyecto
 
+## 1. Clona el repositorio:
+```bash
+git clone https://github.com/Robe1o/prediccion-desercion-estudiantil.git
+cd prediccion-desercion-estudiantil
+```
 
-**1. Instalar dependencias**
+**2. Instalar dependencias**
 --
 ```bash
 pip install -r requirements.txt
@@ -122,7 +127,7 @@ pip install -r requirements.txt
 
 ---
 
-**2. Entrenar el modelo**
+**3. Entrenar el modelo**
 --
 Desde la carpeta del proyecto:
 
@@ -132,7 +137,7 @@ python entrenar.py
 
 ---
 
-**3. Ejecutar la aplicación Streamlit**
+**4. Ejecutar la aplicación Streamlit** (local)
 --
 Desde la misma carpeta:
 
@@ -140,6 +145,11 @@ Desde la misma carpeta:
 python -m streamlit run app.py
 ```
 #####  -  La aplicación se abrirá en tu navegador predeterminado.
+
+***
+## 5. Uso en la nube
+La aplicación también está desplegada en Streamlit Cloud y disponible en:  
+https://prediccion-desercion-estudiantil.streamlit.app/
 
 ---
 ###  Proyecto Final de Almacenes y Minería de Datos
@@ -150,5 +160,3 @@ python -m streamlit run app.py
 
 
 #### Nota: Este proyecto es con fines académicos y puede adaptarse a diferentes contextos institucionales.
-
-
