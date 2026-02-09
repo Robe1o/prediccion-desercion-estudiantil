@@ -2,6 +2,24 @@
 
 Este proyecto implementa un **modelo sencillo de machine learning** para predecir el **riesgo de deserción estudiantil** y una **interfaz interactiva con Streamlit** para explorar los datos y hacer predicciones individuales.
 
+##  Enlaces
+- **App en Vivo:** https://prediccion-desercion-estudiantil.streamlit.app/
+- **Documentación:** [Informe Técnico PDF](docs/Informe_Tecnico_CRISP-DM.pdf)
+
+##  Visualizaciones del Proyecto
+
+### Interfaz del Sistema (Streamlit)
+
+
+### Evaluación del Modelo (Matriz de Confusión)
+![Matriz](models/matriz_confusion.png)
+
+### Factores Clave de Deserción
+![Importancia](models/importancia_caracteristicas.png)
+
+
+
+---
 La estructura básica del proyecto es:
 
 - `📁 data/`: Directorio para el archivo Excel con el récord académico estudiantil.
@@ -13,6 +31,7 @@ La estructura básica del proyecto es:
     - `importancia_caracteristicas.png`: Gráfico que muestra qué factores pesan más en la deserción.
     - `estudiantes_unicos.csv`: Dataset con el último periodo de cada estudiante, usado para el análisis exploratorio.
     - `estudiantes_procesados.csv`: El dataset final tras la ingeniería de variables (todos los periodos).
+- `📁 docs/`: Directorio que contiene el Informe_Tecnico_CRISP-DM en pdf .
 - `entrenar.py`: Script principal de procesamiento, limpieza y entrenamiento del modelo.
 - `app.py`: Aplicación web interactiva para visualización y predicción individual.
 - `requirements.txt`: Lista de dependencias del proyecto.
