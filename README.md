@@ -9,7 +9,7 @@ Este proyecto implementa un **modelo sencillo de machine learning** para predeci
 ##  Visualizaciones del Proyecto
 
 ### Interfaz del Sistema (Streamlit)
-
+![Interfaz](https://github.com/user-attachments/assets/4e1f2818-71f3-407c-bc1c-43c0ac9bcbcf)
 
 ### Evaluación del Modelo (Matriz de Confusión)
 ![Matriz](models/matriz_confusion.png)
@@ -97,6 +97,8 @@ El modelo se valida con un conjunto de prueba (20%) utilizando:
 
     - Análisis Exploratorio: Visualización de la distribución de categorías de riesgo y estadísticas descriptivas.
 
+
+
     - Métricas del Modelo: Revisión del rendimiento del modelo y importancia de las características.
 
     - Predicción de Deserción (ML): Formulario interactivo para predecir, usando el modelo entrenado, si un estudiante desertará basándose en sus características académicas.
@@ -148,4 +150,5 @@ python -m streamlit run app.py
 
 
 #### Nota: Este proyecto es con fines académicos y puede adaptarse a diferentes contextos institucionales.
+
 
