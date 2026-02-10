@@ -607,7 +607,7 @@ st.sidebar.info("""
 st.sidebar.markdown("### ℹ️ Información Técnica")
 st.sidebar.success("""
 **Modelo:** Random Forest Classifier  
-**Variables:** 7 características  
+**Variables:** 6 características  
 **Predicción:** Deserción (Sí/No)  
 **Categorías:** 4 niveles de riesgo  
 **Periodos:** Solo CI y CII (ordinarios)  
