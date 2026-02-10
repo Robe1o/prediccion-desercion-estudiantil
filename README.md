@@ -55,15 +55,15 @@ La estructura básica del proyecto es:
 
     - **Promedio General:** Rendimiento académico acumulado.
 
-    - **Peor Promedio:** Indicador de la dificultad máxima enfrentada en una materia.
-
     - **Asistencia Promedio:** Nivel de compromiso real (filtrando materias homologadas).
+
+    - **Peor Promedio:** Indicador de la dificultad máxima enfrentada en una materia.
 
     - **Tasa de Reprobación:** Relación entre materias perdidas y materias totales cursadas.
 
-    - **Máximo de Intentos:** Número máximo de veces que ha cursado una materia.
+    - **Materias Reprobadas:** Numero de materias que el estudiante ha reprobado.
 
-    - **Categoría de Riesgo:** Se asigna una categoría (BAJO, MEDIO, ALTO, DESERTOR) basada en un sistema de puntos que evalúa condiciones críticas.
+    - **Máximo de Intentos:** Número máximo de veces que ha cursado una materia.
 
   - Detección de deserción real: Un estudiante se considera desertor en un periodo si no aparece en periodos posteriores (excepto en el último periodo general, donde no se puede determinar).
 
@@ -82,7 +82,7 @@ La estructura básica del proyecto es:
 
     - Configuración: 100 árboles de decisión con class_weight='balanced' para manejar el desequilibrio de clases.
 
-    - Características utilizadas: 7 variables (Promedio General, Peor Promedio, Asistencia Promedio, Máximo de Intentos, Materias Reprobadas, Tasa de Reprobación, Categoría de Riesgo numérica).
+    - Características utilizadas: 6 variables (Promedio General, Asistencia Promedio, Peor Promedio, Tasa de Reprobación, Materias Reprobadas, Máximo de Intentos).
 
 - El modelo se entrena para predecir la deserción real (binaria: 0 = continuó, 1 = desertó) utilizando datos históricos.
 
@@ -91,14 +91,17 @@ La estructura básica del proyecto es:
 ## 5. Evaluación
 El modelo se valida con un conjunto de prueba (20%) utilizando:
 * **Métricas:** Accuracy, Precisión, Recall y F1-Score.
+![Metricas](https://github.com/user-attachments/assets/2513590a-3db0-4bc0-b120-635e021ffce5)
+
+
 * **Matriz de Confusión:** Para observar la fiabilidad en la detección de casos de Alto Riesgo.
+![MatrizConfusion](https://github.com/user-attachments/assets/a5417f05-51c7-4db6-b963-0f8551080a7a)
+
 
 ## 6. Despliegue
   - Despliegue simple a nivel académico: ejecución local o en la nube de la app con Streamlit:
 
     - Análisis Exploratorio: Visualización de la distribución de categorías de riesgo y estadísticas descriptivas.
-
-
 
     - Métricas del Modelo: Revisión del rendimiento del modelo y importancia de las características.
 
@@ -162,3 +165,4 @@ https://prediccion-desercion-estudiantil.streamlit.app/
 
 
 #### Nota: Este proyecto es con fines académicos y puede adaptarse a diferentes contextos institucionales.
+
