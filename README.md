@@ -9,7 +9,8 @@ Este proyecto implementa un **modelo sencillo de machine learning** para predeci
 ##  Visualizaciones del Proyecto
 
 ### Interfaz del Sistema (Streamlit)
-![Interfaz](https://github.com/user-attachments/assets/4e1f2818-71f3-407c-bc1c-43c0ac9bcbcf)
+![Interfaz](https://github.com/user-attachments/assets/3b8dc655-3296-4919-8f43-430a7b49c9e4)
+
 
 ### Evaluación del Modelo (Matriz de Confusión)
 ![Matriz](models/matriz_confusion.png)
@@ -157,6 +158,7 @@ https://prediccion-desercion-estudiantil.streamlit.app/
 **Nivel:** 5to Semestre - Ciencia de Datos e IA  
 **Fecha:** Febrero 2026   
 **Institución:** Universidad de Guayaquil (UG)
+
 
 
 #### Nota: Este proyecto es con fines académicos y puede adaptarse a diferentes contextos institucionales.
