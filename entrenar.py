@@ -531,39 +531,57 @@ def entrenar_modelo(df, df_desercion):
         return None
     
     # Features
+    # Nota: mantenemos el cálculo de categoría/puntos para reportes y la app,
+    # pero NO lo usamos como feature para que el modelo sea "puro ML".
     cat_map = {'BAJO': 0, 'MEDIO': 1, 'ALTO': 2, 'DESERTOR': 3}
     df_modelo['CATEGORIA_NUM'] = df_modelo['CATEGORIA'].map(cat_map)
     
     features = [
         'PROMEDIO_GENERAL', 'PEOR_PROMEDIO',
         'ASISTENCIA_PROMEDIO', 'MAX_INTENTOS', 
-        'MATERIAS_REPROBADAS', 'TASA_REPROBACION',
-        'CATEGORIA_NUM'
+        'MATERIAS_REPROBADAS', 'TASA_REPROBACION'
     ]
     
-    X = df_modelo[features]
-    y = df_modelo['DESERTOR_REAL']
+    # Evitar data leakage: split a NIVEL ESTUDIANTE, no por filas/periodos
+    print(f"\n📊 Creando particiones train/test a nivel estudiante (sin fuga de datos)...")
+    estudiantes_ids = df_modelo['ESTUDIANTE'].unique()
     
-    # Verificar distribución de clases
-    print(f"\n📊 Distribución de clases:")
-    print(f"   Clase 0 (Continuó): {(y==0).sum()}")
-    print(f"   Clase 1 (Desertó): {(y==1).sum()}")
+    # Etiqueta por estudiante (si desertó alguna vez)
+    etiquetas_por_estudiante = df_modelo.groupby('ESTUDIANTE')['DESERTOR_REAL'].max()
     
-    # Dividir datos
-    min_samples = y.value_counts().min()
+    # Verificar distribución de clases a nivel estudiante
+    print(f"   Estudiantes que continuaron: {(etiquetas_por_estudiante==0).sum()}")
+    print(f"   Estudiantes que desertaron: {(etiquetas_por_estudiante==1).sum()}")
     
-    if min_samples >= 2:
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42, stratify=y
+    # Dividir lista de estudiantes
+    y_est = etiquetas_por_estudiante
+    min_samples_est = y_est.value_counts().min()
+    
+    if len(y_est.unique()) > 1 and min_samples_est >= 2:
+        est_train, est_test = train_test_split(
+            y_est.index,
+            test_size=0.2,
+            random_state=42,
+            stratify=y_est
         )
-        print(f"✓ Split con stratify")
+        print(f"✓ Split con stratify a nivel estudiante")
     else:
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
+        est_train, est_test = train_test_split(
+            y_est.index,
+            test_size=0.2,
+            random_state=42
         )
-        print(f"⚠️ Split SIN stratify (clase pequeña: {min_samples} muestras)")
+        print(f"⚠️ Split SIN stratify a nivel estudiante (clase pequeña: {min_samples_est} estudiantes)")
     
-    print(f"\nTrain: {len(X_train)} | Test: {len(X_test)}")
+    # Crear X/y usando SOLO filas (periodos) de los estudiantes asignados a cada conjunto
+    X_train = df_modelo[df_modelo['ESTUDIANTE'].isin(est_train)][features]
+    y_train = df_modelo[df_modelo['ESTUDIANTE'].isin(est_train)]['DESERTOR_REAL']
+    
+    X_test = df_modelo[df_modelo['ESTUDIANTE'].isin(est_test)][features]
+    y_test = df_modelo[df_modelo['ESTUDIANTE'].isin(est_test)]['DESERTOR_REAL']
+    
+    print(f"\nEstudiantes en train: {len(est_train)} | Estudiantes en test: {len(est_test)}")
+    print(f"Filas (periodos) en train: {len(X_train)} | Filas (periodos) en test: {len(X_test)}")
     
     # Entrenar modelo
     print(f"\n🌳 Entrenando Random Forest...")

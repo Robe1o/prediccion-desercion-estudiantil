@@ -318,10 +318,6 @@ elif opcion == "🔍 Predecir Deserción (ML)":
             # Calcular categoría de riesgo (para usar como feature)
             categoria, puntos = calcular_categoria(promedio, asistencia, tasa_reprobacion, max_intentos)
             
-            # Mapear categoría a número (igual que en training.py)
-            cat_map = modelo_data['cat_map']
-            categoria_num = cat_map.get(categoria, 0)
-            
             # Crear array con las features en el orden correcto
             features_order = modelo_data['features']
             
@@ -332,21 +328,13 @@ elif opcion == "🔍 Predecir Deserción (ML)":
                 'ASISTENCIA_PROMEDIO': asistencia,
                 'MAX_INTENTOS': max_intentos,
                 'MATERIAS_REPROBADAS': materias_reprobadas,
-                'TASA_REPROBACION': tasa_reprobacion,
-                'CATEGORIA_NUM': categoria_num
+                'TASA_REPROBACION': tasa_reprobacion
             }
             
-            # CORREGIDO: Crear DataFrame con nombres de columnas en lugar de array NumPy
-            # Esto evita el warning de feature names
-            features_df = pd.DataFrame([[
-                features_dict['PROMEDIO_GENERAL'],
-                features_dict['PEOR_PROMEDIO'],
-                features_dict['ASISTENCIA_PROMEDIO'],
-                features_dict['MAX_INTENTOS'],
-                features_dict['MATERIAS_REPROBADAS'],
-                features_dict['TASA_REPROBACION'],
-                features_dict['CATEGORIA_NUM']
-            ]], columns=features_order)
+            # Crear DataFrame usando dinámicamente el orden de features del modelo
+            # Esto evita errores si la lista de características cambia en el entrenamiento
+            row_values = [features_dict[col] for col in features_order]
+            features_df = pd.DataFrame([row_values], columns=features_order)
             
             # Hacer predicción
             model = modelo_data['model']
