@@ -95,7 +95,6 @@ El modelo se valida con un conjunto de prueba (20%) utilizando:
 
 
 * **Matriz de Confusión:** Para observar la fiabilidad en la detección de casos de Alto Riesgo.
-![MatrizConfusion](https://github.com/user-attachments/assets/a5417f05-51c7-4db6-b963-0f8551080a7a)
 
 
 ## 6. Despliegue
@@ -165,4 +164,5 @@ https://prediccion-desercion-estudiantil.streamlit.app/
 
 
 #### Nota: Este proyecto es con fines académicos y puede adaptarse a diferentes contextos institucionales.
+
 
